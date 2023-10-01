@@ -1,0 +1,26 @@
+class Solution:
+    def permute(self, nums: list[int]) -> list[list[int]]:
+        res = []
+        def backtrack(stack, remaining):
+            if not remaining:
+                res.append(stack[:])
+                print("current result: ", res)
+                return
+
+            for i in remaining[:]:
+                print("Before backtracking: stack ", stack, " remaining: ", remaining)
+                stack.append(i)
+                remaining.remove(i)
+                backtrack(stack, remaining)
+                stack.pop()
+                remaining.append(i)
+                print("After backtracking: stack ", stack, " remaining: ", remaining)
+
+        backtrack([], nums)
+        return res
+    
+if __name__ == "__main__":
+    nums = [1, 2, 3, 4]
+    solution = Solution()
+    permutations = solution.permute(nums)
+    print(permutations)
